@@ -1,4 +1,4 @@
-sudo -u hdfs hadoop distcp hdfs://ec2-18-203-235-248.eu-west-1.compute.amazonaws.com:8020/user/diegomarcheselli/teragen-distcp  hdfs://ec2-34-247-13-48.eu-west-1.compute.amazonaws.com:8020/tmp/snawalgaria/
+[ec2-user@ip-172-32-1-185 ~]$  sudo -u hdfs hadoop distcp hdfs://ec2-18-203-235-248.eu-west-1.compute.amazonaws.com:8020/user/diegomarcheselli/teragen-distcp  hdfs://ec2-34-247-13-48.eu-west-1.compute.amazonaws.com:8020/tmp/snawalgaria/
 19/02/13 08:36:54 INFO tools.OptionsParser: parseChunkSize: blocksperchunk false
 19/02/13 08:36:55 INFO tools.DistCp: Input Options: DistCpOptions{atomicCommit=false, syncFolder=false, deleteMissing=false, ignoreFailures=false, overwrite=false, append=false, useDiff=false, useRdiff=false, fromSnapshot=null, toSnapshot=null, skipCRC=false, blocking=true, numListstatusThreads=0, maxMaps=20, mapBandwidth=100, sslConfigurationFile='null', copyStrategy='uniformsize', preserveStatus=[], preserveRawXattrs=false, atomicWorkPath=null, logPath=null, sourceFileListing=null, sourcePaths=[hdfs://ec2-18-203-235-248.eu-west-1.compute.amazonaws.com:8020/user/diegomarcheselli/teragen-distcp], targetPath=hdfs://ec2-34-247-13-48.eu-west-1.compute.amazonaws.com:8020/tmp/snawalgaria, targetPathExists=true, filtersFile='null', blocksPerChunk=0, copyBufferSize=8192}
 19/02/13 08:36:55 INFO client.RMProxy: Connecting to ResourceManager at ip-172-32-1-185.eu-west-1.compute.internal/172.32.1.185:8032
@@ -63,5 +63,39 @@ sudo -u hdfs hadoop distcp hdfs://ec2-18-203-235-248.eu-west-1.compute.amazonaws
 		Bytes Expected=500000000
 		Files Copied=4
 
+[ec2-user@ip-172-32-1-185 ~]$ sudo -u hdfs hdfs fsck /tmp/snawalgaria -files -blocks
+Connecting to namenode via http://ip-172-31-42-139.eu-west-1.compute.internal:50070
+FSCK started by hdfs (auth:SIMPLE) from /172.31.44.213 for path /tmp/snawalgaria at Tue Feb 13 08:43:43 UTC 2019
+/tmp/snawalgaria <dir>
+/tmp/snawalgaria/_SUCCESS 0 bytes, 0 block(s):  OK
 
+/tmp/snwalgaria/part-m-00000 256000000 bytes, 2 block(s):  OK
+0. BP-760199772-172.31.42.139-1539630036196:blk_1073743315_2491 len=134217728 Live_repl=3
+1. BP-760199772-172.31.42.139-1539630036196:blk_1073743317_2493 len=121782272 Live_repl=3
+
+/tmp/snawalgaria/part-m-00001 256000000 bytes, 2 block(s):  OK
+0. BP-760199772-172.31.42.139-1539630036196:blk_1073743314_2490 len=134217728 Live_repl=3
+1. BP-760199772-172.31.42.139-1539630036196:blk_1073743316_2492 len=121782272 Live_repl=3
+
+Status: HEALTHY
+ Total size:	512000000 B
+ Total dirs:	1
+ Total files:	3
+ Total symlinks:		0
+ Total blocks (validated):	4 (avg. block size 128000000 B)
+ Minimally replicated blocks:	4 (100.0 %)
+ Over-replicated blocks:	0 (0.0 %)
+ Under-replicated blocks:	0 (0.0 %)
+ Mis-replicated blocks:		0 (0.0 %)
+ Default replication factor:	3
+ Average block replication:	3.0
+ Corrupt blocks:		0
+ Missing replicas:		0 (0.0 %)
+ Number of data-nodes:		4
+ Number of racks:		1
+FSCK ended at Tue Feb 13 08:43:43 UTC 2019 in 2 milliseconds
+
+
+The filesystem under path '/tmp/snawalgaria' is HEALTHY
+```
 
