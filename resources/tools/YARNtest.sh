@@ -20,13 +20,21 @@ do
          MAP_MB=`echo "($k*0.8)/1" | bc` 
 
          # Set reducer JVM heap 
-         RED_MB=`echo "($k*0.8)/1" | bc` 
+         RED_MB=`echo "($k*0.8)/1" | bc`
+	 echo "MAP_MB = $MAP_MB"
+         echo "RED_MB = $RED_MB"
+         echo "mappers = $i"
+         echo "reducers = $j"
+         echo "container memory = $k"
+         echo "Starting teragen" 
 
         time ${HADOOP}/hadoop jar ${MR}/hadoop-examples.jar teragen \
                      -Dmapreduce.job.maps=$i \
                      -Dmapreduce.map.memory.mb=$k \
                      -Dmapreduce.map.java.opts.max.heap=$MAP_MB \
-                     51200000 /results/tg-10GB-${i}-${j}-${k} 1>tera_${i}_${j}_${k}.out 2>tera_${i}_${j}_${k}.err                       
+       		     51200000 /results/tg-10GB-${i}-${j}-${k} 1>tera_${i}_${j}_${k}.out 2>tera_${i}_${j}_${k}.err                       
+           
+       :wq	echo "Starting terasort"
 
        time ${HADOOP}/hadoop jar $MR/hadoop-examples.jar terasort \
                      -Dmapreduce.job.maps=$i \
