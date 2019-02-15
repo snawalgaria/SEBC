@@ -344,4 +344,82 @@ MariaDB [(none)]> show grants for 'scm'@'%';
 +----------------------------------------------------------------------------------------------------+
 2 rows in set (0.00 sec)
 
+MariaDB [(none)]> status
+--------------
+mysql  Ver 15.1 Distrib 5.5.60-MariaDB, for Linux (x86_64) using readline 5.1
+
+Connection id:		17
+Current database:	
+Current user:		root@localhost
+SSL:			Not in use
+Current pager:		stdout
+Using outfile:		''
+Using delimiter:	;
+Server:			MariaDB
+Server version:		5.5.60-MariaDB MariaDB Server
+Protocol version:	10
+Connection:		Localhost via UNIX socket
+Server characterset:	latin1
+Db     characterset:	latin1
+Client characterset:	utf8
+Conn.  characterset:	utf8
+UNIX socket:		/var/lib/mysql/mysql.sock
+Uptime:			1 hour 10 min 59 sec
+
+Threads: 1  Questions: 111  Slow queries: 0  Opens: 6  Flush tables: 2  Open tables: 27  Queries per second avg: 0.026
+
+hreads: 1  Questions: 111  Slow queries: 0  Opens: 6  Flush tables: 2  Open tables: 27  Queries per second avg: 0.026
+--------------
+
+MariaDB [(none)]> 
+MariaDB [(none)]> SHOW VARIABLES where Variable_name = 'hostname';
++---------------+-------------------------------------------+
+| Variable_name | Value                                     |
++---------------+-------------------------------------------+
+| hostname      | ip-172-32-1-71.eu-west-1.compute.internal |
++---------------+-------------------------------------------+
+1 row in set (0.00 sec)
+
+MariaDB [(none)]> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| hive               |
+| hue                |
+| mysql              |
+| oozie              |
+| performance_schema |
+| rman               |
+| scm                |
+| sentry             |
++--
+
+
+root@ip-172-32-1-156 yum.repos.d]# /usr/share/cmf/schema/scm_prepare_database.sh mysql -h 172.32.1.71 hive hive
+Enter SCM password: 
+JAVA_HOME=/usr/lib/jvm/java-openjdk
+Verifying that we can write to /etc/cloudera-scm-server
+Creating SCM configuration file in /etc/cloudera-scm-server
+Executing:  /usr/lib/jvm/java-openjdk/bin/java -cp /usr/share/java/mysql-connector-java.jar:/usr/share/java/oracle-connector-java.jar:/usr/share/java/postgresql-connector-java.jar:/usr/share/cmf/schema/../lib/* com.cloudera.enterprise.dbutil.DbCommandExecutor /etc/cloudera-scm-server/db.properties com.cloudera.cmf.db.
+[                          main] DbCommandExecutor              INFO  Successfully connected to database.
+All done, your SCM database is configured correctly!
+[root@ip-172-32-1-156 yum.repos.d]# /usr/share/cmf/schema/scm_prepare_database.sh mysql -h 172.32.1.71 oozie oozie
+Enter SCM password: 
+JAVA_HOME=/usr/lib/jvm/java-openjdk
+Verifying that we can write to /etc/cloudera-scm-server
+Creating SCM configuration file in /etc/cloudera-scm-server
+Executing:  /usr/lib/jvm/java-openjdk/bin/java -cp /usr/share/java/mysql-connector-java.jar:/usr/share/java/oracle-connector-java.jar:/usr/share/java/postgresql-connector-java.jar:/usr/share/cmf/schema/../lib/* com.cloudera.enterprise.dbutil.DbCommandExecutor /etc/cloudera-scm-server/db.properties com.cloudera.cmf.db.
+[                          main] DbCommandExecutor              INFO  Successfully connected to database.
+All done, your SCM database is configured correctly!
+[root@ip-172-32-1-156 yum.repos.d]# /usr/share/cmf/schema/scm_prepare_database.sh mysql -h 172.32.1.71 hue hue
+Enter SCM password: 
+JAVA_HOME=/usr/lib/jvm/java-openjdk
+Verifying that we can write to /etc/cloudera-scm-server
+Creating SCM configuration file in /etc/cloudera-scm-server
+Executing:  /usr/lib/jvm/java-openjdk/bin/java -cp /usr/share/java/mysql-connector-java.jar:/usr/share/java/oracle-connector-java.jar:/usr/share/java/postgresql-connector-java.jar:/usr/share/cmf/schema/../lib/* com.cloudera.enterprise.dbutil.DbCommandExecutor /etc/cloudera-scm-server/db.properties com.cloudera.cmf.db.
+[                          main] DbCommandExecutor              INFO  Successfully connected to database.
+All done, your SCM database is configured correctly!
+[root@ip-172-32-1-156 yum.repos.d]# /usr/share/cmf/schema/scm_prepare_database.sh mysql -h 172.32.1.71 oozie oozie
 
